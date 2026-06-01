@@ -1,8 +1,8 @@
 import { Button, Result } from 'antd'
 import { Link } from 'react-router-dom'
-import { PATHS } from '../../routes/paths'
+import { PATHS } from '@/routes/paths'
 
-export function NotFound() {
+const NotFound = () => {
   return (
     <Result
       status="404"
@@ -16,3 +16,5 @@ export function NotFound() {
     />
   )
 }
+
+export default NotFound

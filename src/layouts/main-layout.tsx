@@ -1,17 +1,17 @@
 import { theme as antdTheme, Drawer, Grid, Layout } from 'antd'
 import { type CSSProperties, useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import { AppBreadcrumb } from '../../components/app-breadcrumb/app-breadcrumb'
-import { LayoutHeader } from '../../components/layout-header/layout-header'
-import { LayoutSider } from '../../components/layout-sider/layout-sider'
-import { SidebarMenu } from '../../components/sidebar-menu/sidebar-menu'
-import { useAppTheme } from '../../hooks/use-app-theme/use-app-theme'
+import AppBreadcrumb from '@/components/app-breadcrumb'
+import LayoutHeader from '@/components/layout-header-module/layout-header'
+import LayoutSider from '@/components/layout-sider-module/layout-sider'
+import SidebarMenu from '@/components/sidebar-menu'
+import { useAppTheme } from '@/hooks/use-app-theme'
 import styles from './main-layout.module.css'
 
 const { Content } = Layout
 const { useBreakpoint } = Grid
 
-export function MainLayout() {
+const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const screens = useBreakpoint()
@@ -64,3 +64,5 @@ export function MainLayout() {
     </Layout>
   )
 }
+
+export default MainLayout

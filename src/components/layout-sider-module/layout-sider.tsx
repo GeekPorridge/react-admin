@@ -1,5 +1,5 @@
 import { Layout } from 'antd'
-import { SidebarMenu } from '../sidebar-menu/sidebar-menu'
+import SidebarMenu from '../sidebar-menu'
 import styles from './layout-sider.module.css'
 
 const { Sider } = Layout
@@ -10,7 +10,7 @@ interface LayoutSiderProps {
   onCollapse: (collapsed: boolean) => void
 }
 
-export function LayoutSider({ collapsed, mode, onCollapse }: LayoutSiderProps) {
+const LayoutSider = ({ collapsed, mode, onCollapse }: LayoutSiderProps) => {
   return (
     <Sider
       collapsible
@@ -21,7 +21,9 @@ export function LayoutSider({ collapsed, mode, onCollapse }: LayoutSiderProps) {
       collapsedWidth={64}
       onCollapse={onCollapse}
     >
-      <SidebarMenu />
+      <SidebarMenu collapsed={collapsed} />
     </Sider>
   )
 }
+
+export default LayoutSider

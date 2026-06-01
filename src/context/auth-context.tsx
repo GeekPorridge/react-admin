@@ -13,7 +13,7 @@ import {
   readUser,
   SESSION_EXPIRED_EVENT,
   saveSession,
-} from '../../services/auth-storage'
+} from '@/services/auth-storage'
 
 interface LoginPayload {
   username: string

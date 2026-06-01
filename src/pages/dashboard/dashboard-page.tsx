@@ -2,7 +2,7 @@ import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-react'
 import { Card, Col, Row, Statistic } from 'antd'
 import { useMemo } from 'react'
-import { useAppTheme } from '../../hooks/use-app-theme/use-app-theme'
+import { useAppTheme } from '@/hooks/use-app-theme'
 import styles from './dashboard.module.css'
 
 const chartData = [
@@ -14,7 +14,7 @@ const chartData = [
   { month: 'Jun', users: 3200, orders: 1940 },
 ]
 
-export function Dashboard() {
+const Dashboard = () => {
   const { mode } = useAppTheme()
 
   const chartOptions = useMemo<AgChartOptions>(
@@ -72,3 +72,5 @@ export function Dashboard() {
     </div>
   )
 }
+
+export default Dashboard

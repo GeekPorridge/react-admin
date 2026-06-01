@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { AdminPage } from '../pages/admin-page/admin-page'
-import { Dashboard } from '../pages/dashboard/dashboard'
+import AdminPage from '@/pages/admin/admin-page'
+import Dashboard from '@/pages/dashboard/dashboard-page'
 import { PATHS } from './paths'
 import type { AppRouteObject } from './types'
 

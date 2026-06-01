@@ -1,14 +1,15 @@
 import { Menu, type MenuProps } from 'antd'
 import { useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useAppTheme } from '../../hooks/use-app-theme/use-app-theme'
-import { useAuth } from '../../hooks/use-auth/use-auth'
-import { protectedRoutes } from '../../routes/routes'
-import { buildMenuItems, getMenuSelection } from '../../routes/utils'
+import { useAppTheme } from '@/hooks/use-app-theme'
+import { useAuth } from '@/hooks/use-auth'
+import { protectedRoutes } from '@/routes/routes'
+import { buildMenuItems, getMenuSelection } from '@/routes/utils'
 
 type MenuItem = NonNullable<MenuProps['items']>[number]
 
 type SidebarMenuProps = {
+  collapsed?: boolean
   onNavigate?: () => void
 }
 
@@ -36,7 +37,7 @@ const hasChildrenByKey = (items: MenuItem[], key: string): boolean => {
   return false
 }
 
-export function SidebarMenu({ onNavigate }: SidebarMenuProps) {
+const SidebarMenu = ({ collapsed, onNavigate }: SidebarMenuProps) => {
   const navigate = useNavigate()
   const location = useLocation()
   const { roles } = useAuth()
@@ -53,8 +54,11 @@ export function SidebarMenu({ onNavigate }: SidebarMenuProps) {
     [location.pathname, menuItems],
   )
   const openKeys = useMemo(
-    () => Array.from(new Set([...userOpenKeys, ...matchedOpenKeys])),
-    [matchedOpenKeys, userOpenKeys],
+    () =>
+      collapsed
+        ? []
+        : Array.from(new Set([...userOpenKeys, ...matchedOpenKeys])),
+    [collapsed, matchedOpenKeys, userOpenKeys],
   )
 
   return (
@@ -77,3 +81,5 @@ export function SidebarMenu({ onNavigate }: SidebarMenuProps) {
     />
   )
 }
+
+export default SidebarMenu

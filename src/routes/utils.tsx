@@ -6,7 +6,7 @@ import {
 import type { MenuProps } from 'antd'
 import type { ReactNode } from 'react'
 import type { RouteObject } from 'react-router-dom'
-import { ProtectedRoute } from '../components/protected-route/protected-route'
+import ProtectedRoute from '@/components/protected-route'
 import type { AppRouteObject, RouteMeta } from './types'
 
 type MenuItem = NonNullable<MenuProps['items']>[number]

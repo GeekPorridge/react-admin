@@ -1,7 +1,7 @@
 import { Card, Descriptions, Result, Tag, Typography } from 'antd'
-import { useAuth } from '../../hooks/use-auth/use-auth'
+import { useAuth } from '@/hooks/use-auth'
 
-export function AdminPage() {
+const AdminPage = () => {
   const { user, roles, permissions } = useAuth()
 
   return (
@@ -30,3 +30,5 @@ export function AdminPage() {
     </Card>
   )
 }
+
+export default AdminPage

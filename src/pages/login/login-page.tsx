@@ -16,11 +16,11 @@ import {
 } from 'antd'
 import { type CSSProperties, useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
-import heroImg from '../../assets/hero.png'
-import reactLogo from '../../assets/react.svg'
-import viteLogo from '../../assets/vite.svg'
-import { useAuth } from '../../hooks/use-auth/use-auth'
-import { PATHS } from '../../routes/paths'
+import heroImg from '@/assets/hero.png'
+import reactLogo from '@/assets/react.svg'
+import viteLogo from '@/assets/vite.svg'
+import { useAuth } from '@/hooks/use-auth'
+import { PATHS } from '@/routes/paths'
 import styles from './login.module.css'
 
 interface LoginValues {
@@ -34,7 +34,7 @@ interface RedirectState {
   }
 }
 
-export function Login() {
+const Login = () => {
   const [loading, setLoading] = useState(false)
   const { token } = antdTheme.useToken()
   const auth = useAuth()
@@ -123,3 +123,5 @@ export function Login() {
     </div>
   )
 }
+
+export default Login

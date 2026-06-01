@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { useAuth } from '../../hooks/use-auth/use-auth'
-import { PATHS } from '../../routes/paths'
+import { useAuth } from '@/hooks/use-auth'
+import { PATHS } from '@/routes/paths'
 
 interface ProtectedRouteProps {
   children?: ReactNode
@@ -12,7 +12,7 @@ const canAccess = (requiredRoles: string[] | undefined, userRoles: string[]) =>
   !requiredRoles?.length ||
   requiredRoles.some((role) => userRoles.includes(role))
 
-export function ProtectedRoute({ children, roles }: ProtectedRouteProps) {
+const ProtectedRoute = ({ children, roles }: ProtectedRouteProps) => {
   const auth = useAuth()
   const location = useLocation()
 
@@ -26,3 +26,5 @@ export function ProtectedRoute({ children, roles }: ProtectedRouteProps) {
 
   return children ?? <Outlet />
 }
+
+export default ProtectedRoute

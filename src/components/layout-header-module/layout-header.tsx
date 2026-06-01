@@ -9,8 +9,8 @@ import {
 import type { MenuProps } from 'antd'
 import { Avatar, Button, Dropdown, Flex, Layout, Space } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../hooks/use-auth/use-auth'
-import { PATHS } from '../../routes/paths'
+import { useAuth } from '@/hooks/use-auth'
+import { PATHS } from '@/routes/paths'
 import styles from './layout-header.module.css'
 
 const { Header } = Layout
@@ -22,12 +22,12 @@ interface LayoutHeaderProps {
   onToggleTheme: () => void
 }
 
-export function LayoutHeader({
+const LayoutHeader = ({
   mode,
   showMenuTrigger,
   onOpenMobileMenu,
   onToggleTheme,
-}: LayoutHeaderProps) {
+}: LayoutHeaderProps) => {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
 
@@ -101,3 +101,5 @@ export function LayoutHeader({
     </Header>
   )
 }
+
+export default LayoutHeader
