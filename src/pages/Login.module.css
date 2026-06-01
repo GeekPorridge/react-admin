@@ -1,0 +1,22 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-24);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(22, 119, 255, 0.2),
+      transparent 32%
+    ),
+    linear-gradient(135deg, #f6f8ff 0%, #eef3ff 100%);
+}
+
+.card {
+  width: min(100%, 380px);
+  box-shadow: var(--login-card-shadow);
+}
+
+.heroWrap {
+  margin-bottom: var(--space-24);
+}

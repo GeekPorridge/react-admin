@@ -6,21 +6,22 @@ import {
 import {
   Button,
   Card,
+  Flex,
   Form,
   Input,
-  Typography,
   message,
   theme as antdTheme,
   Tooltip,
-  Flex,
+  Typography,
 } from 'antd'
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { PATHS } from '../routes/paths'
 import reactLogo from '../assets/react.svg'
 import viteLogo from '../assets/vite.svg'
 import heroImg from '../assets/hero.png'
+import styles from './Login.module.css'
 
 interface LoginValues {
   username: string
@@ -61,28 +62,19 @@ export function Login() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'grid',
-        placeItems: 'center',
-        padding: 24,
-        background:
-          'radial-gradient(circle at top left, rgba(22, 119, 255, 0.20), transparent 32%), linear-gradient(135deg, #f6f8ff 0%, #eef3ff 100%)',
-      }}
-    >
+    <div className={styles.page}>
       <Card
-        style={{
-          width: 'min(100%, 380px)',
-          boxShadow: token.boxShadowSecondary,
-        }}
+        className={styles.card}
+        style={
+          { '--login-card-shadow': token.boxShadowSecondary } as CSSProperties
+        }
         styles={{ body: { padding: 28 } }}
       >
         <Flex
           gap="medium"
           justify="center"
           align="center"
-          style={{ marginBottom: 20 }}
+          className={styles.heroWrap}
         >
           <div className="hero">
             <img

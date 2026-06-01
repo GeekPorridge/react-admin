@@ -1,0 +1,12 @@
+.stack {
+  display: grid;
+  gap: var(--space-16);
+}
+
+.title {
+  margin-top: 0;
+}
+
+.chartBody {
+  height: 420px;
+}

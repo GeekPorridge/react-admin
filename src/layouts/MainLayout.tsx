@@ -13,13 +13,14 @@ import {
   Typography,
   theme as antdTheme,
 } from 'antd'
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { AppBreadcrumb } from '../components/AppBreadcrumb'
 import { SidebarMenu } from '../components/SidebarMenu'
 import { useAuth } from '../hooks/useAuth'
 import { useAppTheme } from '../hooks/useAppTheme'
 import { PATHS } from '../routes/paths'
+import styles from './MainLayout.module.css'
 
 const { Header, Sider, Content } = Layout
 
@@ -36,39 +37,23 @@ export function MainLayout() {
   }
 
   return (
-    <Layout style={{ minHeight: '100vh', background: token.colorBgLayout }}>
-      <Sider
-        collapsed={collapsed}
-        theme={mode}
-        style={{ borderInlineEnd: `1px solid ${token.colorBorderSecondary}` }}
-      >
-        <div
-          style={{
-            height: 56,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: mode === 'dark' ? '#fff' : token.colorText,
-            fontWeight: 700,
-            letterSpacing: 0.3,
-          }}
-        >
-          {collapsed ? 'RA' : 'React Admin'}
-        </div>
+    <Layout
+      className={styles.root}
+      style={
+        {
+          '--layout-bg': token.colorBgLayout,
+          '--border-secondary': token.colorBorderSecondary,
+          '--header-bg': token.colorBgContainer,
+          '--brand-color': mode === 'dark' ? '#fff' : token.colorText,
+        } as CSSProperties
+      }
+    >
+      <Sider collapsed={collapsed} theme={mode} className={styles.sider}>
+        <div className={styles.brand}>RA</div>
         <SidebarMenu />
       </Sider>
       <Layout>
-        <Header
-          style={{
-            height: 56,
-            paddingInline: 20,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            background: token.colorBgContainer,
-            borderBottom: `1px solid ${token.colorBorderSecondary}`,
-          }}
-        >
+        <Header className={styles.header}>
           <Space size={16}>
             <Button
               type="text"
@@ -90,7 +75,7 @@ export function MainLayout() {
             </Button>
           </Space>
         </Header>
-        <Content style={{ padding: 24 }}>
+        <Content className={styles.content}>
           <Outlet />
         </Content>
       </Layout>

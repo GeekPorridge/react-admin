@@ -1,0 +1,32 @@
+.root {
+  min-height: 100vh;
+  background: var(--layout-bg);
+}
+
+.sider {
+  border-inline-end: 1px solid var(--border-secondary);
+}
+
+.brand {
+  height: var(--layout-header-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-color);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.header {
+  height: var(--layout-header-height);
+  padding-inline: var(--space-24);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border-secondary);
+}
+
+.content {
+  padding: var(--layout-content-padding);
+}

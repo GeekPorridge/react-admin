@@ -1,9 +1,9 @@
-import { Card, Col, Row, Statistic, Typography, theme as antdTheme } from 'antd'
+import { Card, Col, Row, Statistic, Typography } from 'antd'
 import { AgCharts } from 'ag-charts-react'
 import type { AgChartOptions } from 'ag-charts-community'
 import { useMemo } from 'react'
-import type { ReactNode } from 'react'
 import { useAppTheme } from '../hooks/useAppTheme'
+import styles from './Dashboard.module.css'
 
 const chartData = [
   { month: 'Jan', users: 1200, orders: 760 },
@@ -16,7 +16,6 @@ const chartData = [
 
 export function Dashboard() {
   const { mode } = useAppTheme()
-  const { token } = antdTheme.useToken()
 
   const chartOptions = useMemo<AgChartOptions>(
     () => ({
@@ -47,8 +46,8 @@ export function Dashboard() {
   )
 
   return (
-    <SpaceBlock>
-      <Typography.Title level={3} style={{ marginTop: 0 }}>
+    <div className={styles.stack}>
+      <Typography.Title level={3} className={styles.title}>
         仪表盘
       </Typography.Title>
       <Row gutter={[16, 16]}>
@@ -68,17 +67,11 @@ export function Dashboard() {
           </Card>
         </Col>
       </Row>
-      <Card
-        title="ag-charts-react 示例"
-        style={{ background: token.colorBgContainer }}
-        styles={{ body: { height: 420 } }}
-      >
-        <AgCharts options={chartOptions} />
+      <Card title="ag-charts-react 示例">
+        <div className={styles.chartBody}>
+          <AgCharts options={chartOptions} />
+        </div>
       </Card>
-    </SpaceBlock>
+    </div>
   )
-}
-
-function SpaceBlock({ children }: { children: ReactNode }) {
-  return <div style={{ display: 'grid', gap: 16 }}>{children}</div>
 }
