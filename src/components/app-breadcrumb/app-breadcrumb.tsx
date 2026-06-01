@@ -1,6 +1,6 @@
 import { Breadcrumb, type BreadcrumbProps } from 'antd'
 import { Link, useMatches } from 'react-router-dom'
-import type { RouteHandle } from '../routes/types'
+import type { RouteHandle } from '../../routes/types'
 
 export function AppBreadcrumb() {
   const matches = useMatches()

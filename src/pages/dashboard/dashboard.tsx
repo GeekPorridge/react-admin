@@ -1,9 +1,9 @@
 import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-react'
-import { Card, Col, Row, Statistic, Typography } from 'antd'
+import { Card, Col, Row, Statistic } from 'antd'
 import { useMemo } from 'react'
-import { useAppTheme } from '../hooks/useAppTheme'
-import styles from './Dashboard.module.css'
+import { useAppTheme } from '../../hooks/use-app-theme/use-app-theme'
+import styles from './dashboard.module.css'
 
 const chartData = [
   { month: 'Jan', users: 1200, orders: 760 },
@@ -47,9 +47,6 @@ export function Dashboard() {
 
   return (
     <div className={styles.stack}>
-      {/* <Typography.Title level={3} className={styles.title}>
-        仪表盘
-      </Typography.Title> */}
       <Row gutter={[16, 16]}>
         <Col xs={24} md={8}>
           <Card>

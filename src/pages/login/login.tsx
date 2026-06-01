@@ -16,12 +16,12 @@ import {
 } from 'antd'
 import { type CSSProperties, useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
-import heroImg from '../assets/hero.png'
-import reactLogo from '../assets/react.svg'
-import viteLogo from '../assets/vite.svg'
-import { useAuth } from '../hooks/useAuth'
-import { PATHS } from '../routes/paths'
-import styles from './Login.module.css'
+import heroImg from '../../assets/hero.png'
+import reactLogo from '../../assets/react.svg'
+import viteLogo from '../../assets/vite.svg'
+import { useAuth } from '../../hooks/use-auth/use-auth'
+import { PATHS } from '../../routes/paths'
+import styles from './login.module.css'
 
 interface LoginValues {
   username: string

@@ -5,7 +5,7 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios'
-import { clearSession, readToken, SESSION_EXPIRED_EVENT } from './authStorage'
+import { clearSession, readToken, SESSION_EXPIRED_EVENT } from './auth-storage'
 
 interface ErrorResponse {
   message?: string

@@ -1,0 +1,7 @@
+.sider {
+  position: sticky;
+  top: var(--layout-header-height);
+  height: calc(100vh - var(--layout-header-height));
+  overflow: auto;
+  border-inline-end: 1px solid var(--border-secondary);
+}

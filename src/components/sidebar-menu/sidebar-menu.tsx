@@ -1,10 +1,10 @@
 import { Menu, type MenuProps } from 'antd'
 import { useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useAppTheme } from '../hooks/useAppTheme'
-import { useAuth } from '../hooks/useAuth'
-import { protectedRoutes } from '../routes/routes'
-import { buildMenuItems, getMenuSelection } from '../routes/utils'
+import { useAppTheme } from '../../hooks/use-app-theme/use-app-theme'
+import { useAuth } from '../../hooks/use-auth/use-auth'
+import { protectedRoutes } from '../../routes/routes'
+import { buildMenuItems, getMenuSelection } from '../../routes/utils'
 
 type MenuItem = NonNullable<MenuProps['items']>[number]
 
