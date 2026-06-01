@@ -1,12 +1,13 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { AdminPage } from "../pages/AdminPage";
 import { Dashboard } from "../pages/Dashboard";
+import { PATHS } from "./paths";
 import type { AppRouteObject } from "./types";
 
 export const protectedRoutes: AppRouteObject[] = [
   {
     index: true,
-    element: <Navigate to="/dashboard" replace />,
+    element: <Navigate to={PATHS.dashboard} replace />,
   },
   {
     path: "dashboard",
@@ -22,12 +23,12 @@ export const protectedRoutes: AppRouteObject[] = [
     meta: {
       title: "系统管理",
       icon: "SettingOutlined",
-      breadcrumbTo: "/dashboard",
+      breadcrumbTo: PATHS.dashboard,
     },
     children: [
       {
         index: true,
-        element: <Navigate to="/dashboard" replace />,
+        element: <Navigate to={PATHS.dashboard} replace />,
       },
       {
         path: "admin",

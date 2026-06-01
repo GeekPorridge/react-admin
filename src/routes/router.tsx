@@ -4,16 +4,17 @@ import { MainLayout } from "../layouts/MainLayout";
 import { Forbidden } from "../pages/Forbidden";
 import { Login } from "../pages/Login";
 import { NotFound } from "../pages/NotFound";
+import { PATHS } from "./paths";
 import { protectedRoutes } from "./routes";
 import { toReactRouterRoutes } from "./utils";
 
 export const router = createBrowserRouter([
   {
-    path: "/login",
+    path: PATHS.login,
     element: <Login />,
   },
   {
-    path: "/403",
+    path: PATHS.forbidden,
     element: <Forbidden />,
   },
   {

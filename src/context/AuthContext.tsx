@@ -1,9 +1,10 @@
-import { createContext, useMemo, useState, type ReactNode } from "react";
+import { createContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   clearSession,
   readToken,
   readUser,
   saveSession,
+  SESSION_EXPIRED_EVENT,
   type AuthUser,
 } from "../services/authStorage";
 
@@ -34,6 +35,17 @@ const getPermissions = (roles: string[]) =>
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<AuthUser | null>(() => readUser());
   const [token, setToken] = useState<string | null>(() => readToken());
+
+  useEffect(() => {
+    const handleSessionExpired = () => {
+      clearSession();
+      setUser(null);
+      setToken(null);
+    };
+
+    window.addEventListener(SESSION_EXPIRED_EVENT, handleSessionExpired);
+    return () => window.removeEventListener(SESSION_EXPIRED_EVENT, handleSessionExpired);
+  }, []);
 
   const login = async ({ username, password }: LoginPayload) => {
     const normalizedName = username.trim();

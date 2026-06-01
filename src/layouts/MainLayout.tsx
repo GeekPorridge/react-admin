@@ -19,6 +19,7 @@ import { AppBreadcrumb } from '../components/AppBreadcrumb'
 import { SidebarMenu } from '../components/SidebarMenu'
 import { useAuth } from '../hooks/useAuth'
 import { useAppTheme } from '../hooks/useAppTheme'
+import { PATHS } from '../routes/paths'
 
 const { Header, Sider, Content } = Layout
 
@@ -31,7 +32,7 @@ export function MainLayout() {
 
   const handleLogout = () => {
     logout()
-    navigate('/login', { replace: true })
+    navigate(PATHS.login, { replace: true })
   }
 
   return (

@@ -1,5 +1,6 @@
 import { Button, Result } from "antd";
 import { Link } from "react-router-dom";
+import { PATHS } from "../routes/paths";
 
 export function NotFound() {
   return (
@@ -9,7 +10,7 @@ export function NotFound() {
       subTitle="页面不存在或已被移动。"
       extra={
         <Button type="primary">
-          <Link to="/dashboard">返回首页</Link>
+          <Link to={PATHS.dashboard}>返回首页</Link>
         </Button>
       }
     />

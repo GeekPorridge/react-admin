@@ -17,6 +17,7 @@ import {
 import { useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
+import { PATHS } from '../routes/paths'
 import reactLogo from '../assets/react.svg'
 import viteLogo from '../assets/vite.svg'
 import heroImg from '../assets/hero.png'
@@ -39,7 +40,7 @@ export function Login() {
   const navigate = useNavigate()
   const location = useLocation()
   const redirectState = location.state as RedirectState | null
-  const from = redirectState?.from?.pathname ?? '/dashboard'
+  const from = redirectState?.from?.pathname ?? PATHS.dashboard
 
   if (auth.isAuthenticated) {
     return <Navigate to={from} replace />

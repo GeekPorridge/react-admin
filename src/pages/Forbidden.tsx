@@ -1,5 +1,6 @@
 import { Button, Result } from "antd";
 import { Link } from "react-router-dom";
+import { PATHS } from "../routes/paths";
 
 export function Forbidden() {
   return (
@@ -9,7 +10,7 @@ export function Forbidden() {
       subTitle="抱歉，当前账号没有权限访问此页面。"
       extra={
         <Button type="primary">
-          <Link to="/dashboard">返回仪表盘</Link>
+          <Link to={PATHS.dashboard}>返回仪表盘</Link>
         </Button>
       }
     />

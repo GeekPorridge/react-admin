@@ -5,7 +5,7 @@ import axios, {
   type InternalAxiosRequestConfig,
 } from "axios";
 import { message } from "antd";
-import { readToken } from "./authStorage";
+import { clearSession, readToken, SESSION_EXPIRED_EVENT } from "./authStorage";
 
 interface ErrorResponse {
   message?: string;
@@ -33,6 +33,8 @@ export const http = axios.create({
   timeout: 10_000,
 });
 
+let hasHandledUnauthorized = false;
+
 http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = readToken();
 
@@ -45,16 +47,25 @@ http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 });
 
 http.interceptors.response.use(
-  (response: AxiosResponse) => response,
+  (response: AxiosResponse) => {
+    hasHandledUnauthorized = false;
+    return response;
+  },
   (error: AxiosError<ErrorResponse>) => {
     const status = error.response?.status;
     const serverMessage = error.response?.data?.message;
-    message.error(getErrorMessage(status, serverMessage));
 
     if (status === 401) {
-      window.location.replace("/login");
+      if (!hasHandledUnauthorized) {
+        hasHandledUnauthorized = true;
+        message.error(getErrorMessage(status, serverMessage));
+        clearSession();
+        window.dispatchEvent(new Event(SESSION_EXPIRED_EVENT));
+      }
+      return Promise.reject(error);
     }
 
+    message.error(getErrorMessage(status, serverMessage));
     return Promise.reject(error);
   },
 );

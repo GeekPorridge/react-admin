@@ -5,6 +5,8 @@ export interface AuthUser {
   permissions: string[];
 }
 
+export const SESSION_EXPIRED_EVENT = "react_admin_session_expired";
+
 const TOKEN_KEY = "react_admin_token";
 const USER_KEY = "react_admin_user";
 
