@@ -1,6 +1,6 @@
-import { Button, Result } from "antd";
-import { Link } from "react-router-dom";
-import { PATHS } from "../routes/paths";
+import { Button, Result } from 'antd'
+import { Link } from 'react-router-dom'
+import { PATHS } from '../routes/paths'
 
 export function Forbidden() {
   return (
@@ -14,5 +14,5 @@ export function Forbidden() {
         </Button>
       }
     />
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { AdminPage } from "../pages/AdminPage";
-import { Dashboard } from "../pages/Dashboard";
-import { PATHS } from "./paths";
-import type { AppRouteObject } from "./types";
+import { Navigate, Outlet } from 'react-router-dom'
+import { AdminPage } from '../pages/AdminPage'
+import { Dashboard } from '../pages/Dashboard'
+import { PATHS } from './paths'
+import type { AppRouteObject } from './types'
 
 export const protectedRoutes: AppRouteObject[] = [
   {
@@ -10,19 +10,19 @@ export const protectedRoutes: AppRouteObject[] = [
     element: <Navigate to={PATHS.dashboard} replace />,
   },
   {
-    path: "dashboard",
+    path: 'dashboard',
     element: <Dashboard />,
     meta: {
-      title: "仪表盘",
-      icon: "DashboardOutlined",
+      title: '仪表盘',
+      icon: 'DashboardOutlined',
     },
   },
   {
-    path: "system",
+    path: 'system',
     element: <Outlet />,
     meta: {
-      title: "系统管理",
-      icon: "SettingOutlined",
+      title: '系统管理',
+      icon: 'SettingOutlined',
       breadcrumbTo: PATHS.dashboard,
     },
     children: [
@@ -31,14 +31,14 @@ export const protectedRoutes: AppRouteObject[] = [
         element: <Navigate to={PATHS.dashboard} replace />,
       },
       {
-        path: "admin",
+        path: 'admin',
         element: <AdminPage />,
         meta: {
-          title: "管理员页面",
-          icon: "SafetyCertificateOutlined",
-          roles: ["admin"],
+          title: '管理员页面',
+          icon: 'SafetyCertificateOutlined',
+          roles: ['admin'],
         },
       },
     ],
   },
-];
+]

@@ -1,12 +1,12 @@
-import { createBrowserRouter } from "react-router-dom";
-import { ProtectedRoute } from "../components/ProtectedRoute";
-import { MainLayout } from "../layouts/MainLayout";
-import { Forbidden } from "../pages/Forbidden";
-import { Login } from "../pages/Login";
-import { NotFound } from "../pages/NotFound";
-import { PATHS } from "./paths";
-import { protectedRoutes } from "./routes";
-import { toReactRouterRoutes } from "./utils";
+import { createBrowserRouter } from 'react-router-dom'
+import { ProtectedRoute } from '../components/ProtectedRoute'
+import { MainLayout } from '../layouts/MainLayout'
+import { Forbidden } from '../pages/Forbidden'
+import { Login } from '../pages/Login'
+import { NotFound } from '../pages/NotFound'
+import { PATHS } from './paths'
+import { protectedRoutes } from './routes'
+import { toReactRouterRoutes } from './utils'
 
 export const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
     element: <Forbidden />,
   },
   {
-    path: "/",
+    path: '/',
     element: (
       <ProtectedRoute>
         <MainLayout />
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
     children: toReactRouterRoutes(protectedRoutes),
   },
   {
-    path: "*",
+    path: '*',
     element: <NotFound />,
   },
-]);
+])
