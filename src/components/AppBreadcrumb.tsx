@@ -5,24 +5,27 @@ import type { RouteHandle } from "../routes/types";
 export function AppBreadcrumb() {
   const matches = useMatches();
 
-  const items = matches.reduce<NonNullable<BreadcrumbProps["items"]>>(
-    (breadcrumbItems, match, index) => {
+  const titledMatches = matches
+    .map((match) => {
       const handle = match.handle as RouteHandle | undefined;
       const title = handle?.meta?.title;
 
       if (!title) {
-        return breadcrumbItems;
+        return null;
       }
 
-      const isLast = index === matches.length - 1;
-      breadcrumbItems.push({
-        title: isLast ? title : <Link to={match.pathname}>{title}</Link>,
-      });
+      const to = handle?.meta?.breadcrumbTo ?? handle?.meta?.redirectTo ?? match.pathname;
 
-      return breadcrumbItems;
-    },
-    [],
-  );
+      return { title, to };
+    })
+    .filter((match): match is { title: string; to: string } => Boolean(match));
+
+  const items = titledMatches.map<NonNullable<BreadcrumbProps["items"]>[number]>((match, index) => {
+    const isLast = index === titledMatches.length - 1;
+    return {
+      title: isLast ? match.title : <Link to={match.to}>{match.title}</Link>,
+    };
+  });
 
   return <Breadcrumb items={items} />;
 }

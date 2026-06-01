@@ -22,8 +22,13 @@ export const protectedRoutes: AppRouteObject[] = [
     meta: {
       title: "系统管理",
       icon: "SettingOutlined",
+      breadcrumbTo: "/dashboard",
     },
     children: [
+      {
+        index: true,
+        element: <Navigate to="/dashboard" replace />,
+      },
       {
         path: "admin",
         element: <AdminPage />,

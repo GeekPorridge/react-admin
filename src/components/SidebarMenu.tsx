@@ -1,10 +1,34 @@
-import { Menu } from "antd";
+import { Menu, type MenuProps } from "antd";
 import { useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { protectedRoutes } from "../routes/routes";
 import { buildMenuItems, getMenuSelection } from "../routes/utils";
 import { useAppTheme } from "../hooks/useAppTheme";
+
+type MenuItem = NonNullable<MenuProps["items"]>[number];
+
+const hasChildrenByKey = (items: MenuItem[], key: string): boolean => {
+  for (const item of items) {
+    if (!item || typeof item !== "object" || !("key" in item)) {
+      continue;
+    }
+
+    const itemKey = String(item.key);
+    const children =
+      "children" in item && Array.isArray(item.children) ? (item.children as MenuItem[]) : [];
+
+    if (itemKey === key) {
+      return children.length > 0;
+    }
+
+    if (children.length && hasChildrenByKey(children, key)) {
+      return true;
+    }
+  }
+
+  return false;
+};
 
 export function SidebarMenu() {
   const navigate = useNavigate();
@@ -32,7 +56,13 @@ export function SidebarMenu() {
       selectedKeys={selectedKeys}
       openKeys={openKeys}
       onOpenChange={(keys) => setUserOpenKeys(keys.map(String))}
-      onClick={({ key }) => navigate(key)}
+      onClick={({ key }) => {
+        const path = String(key);
+        if (hasChildrenByKey(menuItems as MenuItem[], path)) {
+          return;
+        }
+        navigate(path);
+      }}
       style={{ borderInlineEnd: 0 }}
     />
   );

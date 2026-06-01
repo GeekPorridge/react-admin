@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 export interface RouteMeta {
   title: string;
   icon?: string;
+  breadcrumbTo?: string;
+  redirectTo?: string;
   hideInMenu?: boolean;
   roles?: string[];
 }
