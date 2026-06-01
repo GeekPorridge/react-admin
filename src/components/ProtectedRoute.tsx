@@ -1,5 +1,5 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import type { ReactNode } from 'react'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { PATHS } from '../routes/paths'
 
@@ -24,5 +24,5 @@ export function ProtectedRoute({ children, roles }: ProtectedRouteProps) {
     return <Navigate to={PATHS.forbidden} replace />
   }
 
-  return children ? <>{children}</> : <Outlet />
+  return children ?? <Outlet />
 }

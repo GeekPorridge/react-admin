@@ -28,7 +28,9 @@ const hasRoleAccess = (meta: RouteMeta | undefined, roles: string[]) =>
 export const toReactRouterRoutes = (routes: AppRouteObject[]): RouteObject[] =>
   routes.map((route) => {
     const element = route.meta?.roles?.length ? (
-      <ProtectedRoute roles={route.meta.roles}>{route.element}</ProtectedRoute>
+      <ProtectedRoute key={route.path} roles={route.meta.roles}>
+        {route.element}
+      </ProtectedRoute>
     ) : (
       route.element
     )

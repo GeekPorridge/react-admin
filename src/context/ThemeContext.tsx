@@ -1,4 +1,10 @@
-import { createContext, useMemo, useState, type ReactNode } from 'react'
+import {
+  createContext,
+  type ReactNode,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react'
 
 export type ThemeMode = 'light' | 'dark'
 
@@ -24,14 +30,14 @@ const readThemeMode = (): ThemeMode => {
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [mode, setMode] = useState<ThemeMode>(() => readThemeMode())
 
-  const setThemeMode = (nextMode: ThemeMode) => {
+  const setThemeMode = useCallback((nextMode: ThemeMode) => {
     localStorage.setItem(THEME_KEY, nextMode)
     setMode(nextMode)
-  }
+  }, [])
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setThemeMode(mode === 'dark' ? 'light' : 'dark')
-  }
+  }, [mode, setThemeMode])
 
   const value = useMemo<ThemeContextValue>(
     () => ({
@@ -39,7 +45,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       toggleTheme,
       setThemeMode,
     }),
-    [mode],
+    [mode, setThemeMode, toggleTheme],
   )
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>

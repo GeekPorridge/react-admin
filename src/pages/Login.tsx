@@ -4,23 +4,23 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import {
+  theme as antdTheme,
   Button,
   Card,
   Flex,
   Form,
   Input,
   message,
-  theme as antdTheme,
   Tooltip,
   Typography,
 } from 'antd'
-import { useState, type CSSProperties } from 'react'
+import { type CSSProperties, useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
-import { PATHS } from '../routes/paths'
+import heroImg from '../assets/hero.png'
 import reactLogo from '../assets/react.svg'
 import viteLogo from '../assets/vite.svg'
-import heroImg from '../assets/hero.png'
+import { useAuth } from '../hooks/useAuth'
+import { PATHS } from '../routes/paths'
 import styles from './Login.module.css'
 
 interface LoginValues {

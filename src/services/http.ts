@@ -1,10 +1,10 @@
+import { message } from 'antd'
 import axios, {
-  AxiosError,
+  type AxiosError,
   AxiosHeaders,
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios'
-import { message } from 'antd'
 import { clearSession, readToken, SESSION_EXPIRED_EVENT } from './authStorage'
 
 interface ErrorResponse {

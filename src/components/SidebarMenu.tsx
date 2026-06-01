@@ -1,12 +1,16 @@
 import { Menu, type MenuProps } from 'antd'
 import { useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useAppTheme } from '../hooks/useAppTheme'
 import { useAuth } from '../hooks/useAuth'
 import { protectedRoutes } from '../routes/routes'
 import { buildMenuItems, getMenuSelection } from '../routes/utils'
-import { useAppTheme } from '../hooks/useAppTheme'
 
 type MenuItem = NonNullable<MenuProps['items']>[number]
+
+type SidebarMenuProps = {
+  onNavigate?: () => void
+}
 
 const hasChildrenByKey = (items: MenuItem[], key: string): boolean => {
   for (const item of items) {
@@ -32,7 +36,7 @@ const hasChildrenByKey = (items: MenuItem[], key: string): boolean => {
   return false
 }
 
-export function SidebarMenu() {
+export function SidebarMenu({ onNavigate }: SidebarMenuProps) {
   const navigate = useNavigate()
   const location = useLocation()
   const { roles } = useAuth()
@@ -67,6 +71,7 @@ export function SidebarMenu() {
           return
         }
         navigate(path)
+        onNavigate?.()
       }}
       style={{ borderInlineEnd: 0 }}
     />

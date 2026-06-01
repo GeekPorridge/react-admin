@@ -1,17 +1,18 @@
 import {
   createContext,
+  type ReactNode,
+  useCallback,
   useEffect,
   useMemo,
   useState,
-  type ReactNode,
 } from 'react'
 import {
+  type AuthUser,
   clearSession,
   readToken,
   readUser,
-  saveSession,
   SESSION_EXPIRED_EVENT,
-  type AuthUser,
+  saveSession,
 } from '../services/authStorage'
 
 interface LoginPayload {
@@ -56,7 +57,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       window.removeEventListener(SESSION_EXPIRED_EVENT, handleSessionExpired)
   }, [])
 
-  const login = async ({ username, password }: LoginPayload) => {
+  const login = useCallback(async ({ username, password }: LoginPayload) => {
     const normalizedName = username.trim()
 
     if (!normalizedName || !password) {
@@ -77,13 +78,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
     saveSession(nextToken, nextUser)
     setUser(nextUser)
     setToken(nextToken)
-  }
+  }, [])
 
-  const logout = () => {
+  const logout = useCallback(() => {
     clearSession()
     setUser(null)
     setToken(null)
-  }
+  }, [])
 
   const value = useMemo<AuthContextValue>(
     () => ({
@@ -95,7 +96,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       login,
       logout,
     }),
-    [user, token],
+    [user, token, login, logout],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

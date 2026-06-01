@@ -1,6 +1,6 @@
-import { Card, Col, Row, Statistic, Typography } from 'antd'
-import { AgCharts } from 'ag-charts-react'
 import type { AgChartOptions } from 'ag-charts-community'
+import { AgCharts } from 'ag-charts-react'
+import { Card, Col, Row, Statistic, Typography } from 'antd'
 import { useMemo } from 'react'
 import { useAppTheme } from '../hooks/useAppTheme'
 import styles from './Dashboard.module.css'
@@ -47,9 +47,9 @@ export function Dashboard() {
 
   return (
     <div className={styles.stack}>
-      <Typography.Title level={3} className={styles.title}>
+      {/* <Typography.Title level={3} className={styles.title}>
         仪表盘
-      </Typography.Title>
+      </Typography.Title> */}
       <Row gutter={[16, 16]}>
         <Col xs={24} md={8}>
           <Card>
