@@ -1,6 +1,6 @@
 import { Card, Col, Row, Skeleton, Statistic } from 'antd'
-import { useApi } from '@/hooks/use-swr'
 import { Charts } from '@/components/charts'
+import { useApi } from '@/hooks/use-swr'
 import styles from './index.module.css'
 
 interface DashboardStats {
@@ -84,10 +84,7 @@ const Dashboard = () => {
               {pieLoading || !pieData ? (
                 <Skeleton active />
               ) : (
-                <Charts.Pie
-                  data={pieData}
-                  height={350}
-                />
+                <Charts.Pie data={pieData} height={350} />
               )}
             </div>
           </Card>

@@ -1,6 +1,6 @@
 import {
   LogoutOutlined,
-  MenuFoldOutlined,
+  MenuOutlined,
   MoonOutlined,
   SunOutlined,
 } from '@ant-design/icons'
@@ -50,7 +50,7 @@ const LayoutHeader = ({
         {showMenuTrigger && (
           <Button
             type="text"
-            icon={<MenuFoldOutlined />}
+            icon={<MenuOutlined />}
             onClick={onOpenMobileMenu}
             className={styles.trigger}
             aria-label="打开菜单"

@@ -6,6 +6,7 @@ import {
 } from '@ant-design/icons'
 import { App, Button, Card, Form, Input, Popconfirm, Space, Tag } from 'antd'
 import type { ColumnType } from 'antd/es/table'
+import dayjs from 'dayjs'
 import { useCallback } from 'react'
 import { SearchTable, useSearchTable } from '@/components/search-table'
 import type {
@@ -101,17 +102,14 @@ const UserTable = () => {
     {
       title: '姓名',
       dataIndex: 'name',
-      width: 120,
     },
     {
       title: '邮箱',
       dataIndex: 'email',
-      width: 200,
     },
     {
       title: '角色',
       dataIndex: 'role',
-      width: 100,
       render: (role: string) => (
         <Tag color={role === 'admin' ? 'blue' : 'default'}>{role}</Tag>
       ),
@@ -119,7 +117,6 @@ const UserTable = () => {
     {
       title: '状态',
       dataIndex: 'status',
-      width: 100,
       render: (status: string) => (
         <Tag color={status === 'active' ? 'green' : 'red'}>
           {status === 'active' ? '启用' : '禁用'}
@@ -129,8 +126,7 @@ const UserTable = () => {
     {
       title: '创建时间',
       dataIndex: 'createdAt',
-      width: 180,
-      render: (v: string) => new Date(v).toLocaleString('zh-CN'),
+      render: (v: string) => dayjs(v).format('YYYY-MM-DD HH:mm'),
     },
   ]
 
@@ -151,7 +147,6 @@ const UserTable = () => {
     {
       title: '操作',
       key: 'action',
-      width: 160,
       fixed: 'right' as const,
       render: (_: unknown, record: UserItem) => (
         <Space>
@@ -176,7 +171,7 @@ const UserTable = () => {
     },
   ]
 
-  return <SearchTable.Table<UserItem> columns={fullColumns} scrollX={960} />
+  return <SearchTable.Table<UserItem> columns={fullColumns} scrollX={1200} />
 }
 
 export default UserList

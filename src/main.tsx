@@ -10,7 +10,19 @@ import { router } from '@/routes/router'
 import { useAppTheme } from './hooks/use-app-theme'
 import './styles/global.css'
 
+import dayjs from 'dayjs'
+import dayjsDuration from 'dayjs/plugin/duration'
+import dayjsIsSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+import dayjsFromNow from 'dayjs/plugin/relativeTime'
+import utc from 'dayjs/plugin/utc'
+
 ModuleRegistry.registerModules([AllCommunityModule])
+
+dayjs.locale('zh-hk')
+dayjs.extend(dayjsDuration)
+dayjs.extend(dayjsIsSameOrAfter)
+dayjs.extend(dayjsFromNow)
+dayjs.extend(utc)
 
 function RootApp() {
   const { mode } = useAppTheme()

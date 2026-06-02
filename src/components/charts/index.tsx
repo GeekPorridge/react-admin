@@ -17,27 +17,29 @@ function PieChart({ data, title, height = 420 }: PieChartProps) {
   const theme = useChartTheme()
   return (
     <AgCharts
-      options={{
-        theme,
-        data,
-        title: title ? { text: title } : undefined,
-        series: [
-          {
-            type: 'pie',
-            angleKey: 'value',
-            calloutLabelKey: 'label',
-            sectorLabelKey: 'value',
-            sectorLabel: {
-              color: 'white',
-              fontWeight: 'bold',
+      options={
+        {
+          theme,
+          data,
+          title: title ? { text: title } : undefined,
+          series: [
+            {
+              type: 'pie',
+              angleKey: 'value',
+              calloutLabelKey: 'label',
+              sectorLabelKey: 'value',
+              sectorLabel: {
+                color: 'white',
+                fontWeight: 'bold',
+              },
             },
+          ],
+          legend: {
+            position: 'bottom',
           },
-        ],
-        legend: {
-          position: 'bottom',
-        },
-        height,
-      } as unknown as AgChartOptions}
+          height,
+        } as unknown as AgChartOptions
+      }
     />
   )
 }
@@ -75,7 +77,13 @@ function BarChart({ data, xKey, series, title, height = 420 }: AxisChartProps) {
   return <AgCharts options={options} />
 }
 
-function LineChart({ data, xKey, series, title, height = 420 }: AxisChartProps) {
+function LineChart({
+  data,
+  xKey,
+  series,
+  title,
+  height = 420,
+}: AxisChartProps) {
   const theme = useChartTheme()
   const options: AgChartOptions = {
     theme,
