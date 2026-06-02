@@ -35,6 +35,23 @@ interface ChartItem {
 export const fetchDashboardChart = () =>
   http.get<ChartItem[]>('/dashboard/chart').then((res) => res.data)
 
+interface PieItem {
+  label: string
+  value: number
+}
+
+export const fetchDashboardPie = () =>
+  http.get<PieItem[]>('/dashboard/pie').then((res) => res.data)
+
+interface LineItem {
+  month: string
+  revenue: number
+  cost: number
+}
+
+export const fetchDashboardLine = () =>
+  http.get<LineItem[]>('/dashboard/line').then((res) => res.data)
+
 interface PaginatedResponse<T> {
   list: T[]
   total: number

@@ -1,4 +1,5 @@
 import {
+  FormOutlined,
   HomeOutlined,
   SettingOutlined,
   UnorderedListOutlined,
@@ -9,6 +10,7 @@ import { PATHS } from './paths'
 import type { AppRouteObject } from './types'
 
 const AdminPage = lazy(() => import('@/pages/admin'))
+const BasicFormPage = lazy(() => import('@/pages/form/basic-form'))
 const DashboardPage = lazy(() => import('@/pages/dashboard'))
 const UserListPage = lazy(() => import('@/pages/list/user-list'))
 
@@ -46,7 +48,7 @@ export const protectedRoutes: AppRouteObject[] = [
     path: 'form',
     element: <Outlet />,
     title: '表单页',
-    icon: <SettingOutlined />,
+    icon: <FormOutlined />,
     breadcrumbTo: PATHS.HOME,
     children: [
       {
@@ -54,8 +56,8 @@ export const protectedRoutes: AppRouteObject[] = [
         element: <Navigate to={PATHS.HOME} replace />,
       },
       {
-        path: 'sub-page',
-        element: <AdminPage />,
+        path: 'basic-form',
+        element: <BasicFormPage />,
         title: '基础表单',
       },
     ],

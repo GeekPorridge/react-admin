@@ -1,4 +1,4 @@
-import { Card, Descriptions, Result, Tag, Typography } from 'antd'
+import { Card, Descriptions, Result, Space, Tag, Typography } from 'antd'
 import { useAuth } from '@/hooks/use-auth'
 
 const AdminPage = () => {
@@ -15,16 +15,20 @@ const AdminPage = () => {
       <Descriptions bordered size="small" column={1}>
         <Descriptions.Item label="用户名">{user?.name}</Descriptions.Item>
         <Descriptions.Item label="角色">
-          {roles.map((role) => (
-            <Tag color="blue" key={role}>
-              {role}
-            </Tag>
-          ))}
+          <Space wrap>
+            {roles.map((role) => (
+              <Tag color="blue" key={role}>
+                {role}
+              </Tag>
+            ))}
+          </Space>
         </Descriptions.Item>
         <Descriptions.Item label="权限">
-          {permissions.map((permission) => (
-            <Tag key={permission}>{permission}</Tag>
-          ))}
+          <Space>
+            {permissions.map((permission) => (
+              <Tag key={permission}>{permission}</Tag>
+            ))}
+          </Space>
         </Descriptions.Item>
       </Descriptions>
     </Card>

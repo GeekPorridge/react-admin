@@ -1,9 +1,6 @@
-import type { AgChartOptions } from 'ag-charts-community'
-import { AgCharts } from 'ag-charts-react'
 import { Card, Col, Row, Skeleton, Statistic } from 'antd'
-import { useMemo } from 'react'
-import { useAppTheme } from '@/hooks/use-app-theme'
 import { useApi } from '@/hooks/use-swr'
+import { Charts } from '@/components/charts'
 import styles from './index.module.css'
 
 interface DashboardStats {
@@ -18,43 +15,26 @@ interface ChartItem {
   orders: number
 }
 
+interface PieItem {
+  label: string
+  value: number
+}
+
+interface LineItem {
+  month: string
+  revenue: number
+  cost: number
+}
+
 const Dashboard = () => {
-  const { mode } = useAppTheme()
   const { data: stats, isLoading: statsLoading } =
     useApi<DashboardStats>('/dashboard/stats')
-  const { data: chartData, isLoading: chartLoading } =
+  const { data: barData, isLoading: barLoading } =
     useApi<ChartItem[]>('/dashboard/chart')
-
-  const chartOptions = useMemo<AgChartOptions | null>(() => {
-    if (!chartData) {
-      return null
-    }
-
-    return {
-      theme: mode === 'dark' ? 'ag-default-dark' : 'ag-default',
-      data: chartData,
-      title: {
-        text: '业务增长趋势',
-      },
-      series: [
-        {
-          type: 'bar',
-          xKey: 'month',
-          yKey: 'users',
-          yName: '新增用户',
-        },
-        {
-          type: 'bar',
-          xKey: 'month',
-          yKey: 'orders',
-          yName: '订单数',
-        },
-      ],
-      legend: {
-        position: 'bottom',
-      },
-    }
-  }, [mode, chartData])
+  const { data: pieData, isLoading: pieLoading } =
+    useApi<PieItem[]>('/dashboard/pie')
+  const { data: lineData, isLoading: lineLoading } =
+    useApi<LineItem[]>('/dashboard/line')
 
   return (
     <div className={styles.stack}>
@@ -96,15 +76,64 @@ const Dashboard = () => {
           </Card>
         </Col>
       </Row>
-      <Card title="ag-charts-react 示例">
-        <div className={styles.chartBody}>
-          {chartLoading || !chartOptions ? (
-            <Skeleton active />
-          ) : (
-            <AgCharts options={chartOptions} />
-          )}
-        </div>
-      </Card>
+
+      <Row gutter={[16, 16]}>
+        <Col xs={24} lg={12}>
+          <Card title="渠道来源分布">
+            <div className={styles.chartBody}>
+              {pieLoading || !pieData ? (
+                <Skeleton active />
+              ) : (
+                <Charts.Pie
+                  data={pieData}
+                  height={350}
+                />
+              )}
+            </div>
+          </Card>
+        </Col>
+        <Col xs={24} lg={12}>
+          <Card title="营收趋势">
+            <div className={styles.chartBody}>
+              {lineLoading || !lineData ? (
+                <Skeleton active />
+              ) : (
+                <Charts.Line
+                  data={lineData}
+                  xKey="month"
+                  series={[
+                    { yKey: 'revenue', yName: '收入' },
+                    { yKey: 'cost', yName: '成本' },
+                  ]}
+                  height={350}
+                />
+              )}
+            </div>
+          </Card>
+        </Col>
+      </Row>
+
+      <Row gutter={[16, 16]}>
+        <Col span={24}>
+          <Card title="业务增长趋势">
+            <div className={styles.chartBody}>
+              {barLoading || !barData ? (
+                <Skeleton active />
+              ) : (
+                <Charts.Bar
+                  data={barData}
+                  xKey="month"
+                  series={[
+                    { yKey: 'users', yName: '新增用户' },
+                    { yKey: 'orders', yName: '订单数' },
+                  ]}
+                  height={350}
+                />
+              )}
+            </div>
+          </Card>
+        </Col>
+      </Row>
     </div>
   )
 }

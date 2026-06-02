@@ -114,3 +114,20 @@ export const chartData = [
   { month: '5月', users: 2800, orders: 1680 },
   { month: '6月', users: 3200, orders: 1940 },
 ]
+
+export const pieData = [
+  { label: '直接访问', value: 335 },
+  { label: '邮件营销', value: 310 },
+  { label: '联盟广告', value: 234 },
+  { label: '视频广告', value: 135 },
+  { label: '搜索引擎', value: 548 },
+]
+
+export const lineData = [
+  { month: '1月', revenue: 3800, cost: 2100 },
+  { month: '2月', revenue: 4200, cost: 2300 },
+  { month: '3月', revenue: 5100, cost: 2800 },
+  { month: '4月', revenue: 4700, cost: 2600 },
+  { month: '5月', revenue: 5800, cost: 3200 },
+  { month: '6月', revenue: 6200, cost: 3400 },
+]

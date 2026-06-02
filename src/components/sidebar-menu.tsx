@@ -1,5 +1,5 @@
 import { Menu, type MenuProps } from 'antd'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAppTheme } from '@/hooks/use-app-theme'
 import { useAuth } from '@/hooks/use-auth'
@@ -59,6 +59,14 @@ const SidebarMenu = ({ collapsed, onNavigate }: SidebarMenuProps) => {
       : Array.from(new Set([...userOpenKeys, ...matchedOpenKeys]))
     return merged
   }, [collapsed, matchedOpenKeys, userOpenKeys])
+
+  useEffect(() => {
+    if (!collapsed) {
+      setUserOpenKeys((prev) =>
+        prev.filter((key) => matchedOpenKeys.includes(key)),
+      )
+    }
+  }, [collapsed, matchedOpenKeys])
 
   return (
     <Menu

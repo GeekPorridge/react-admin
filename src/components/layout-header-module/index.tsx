@@ -2,8 +2,6 @@ import {
   LogoutOutlined,
   MenuFoldOutlined,
   MoonOutlined,
-  SettingFilled,
-  SkinFilled,
   SunOutlined,
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'

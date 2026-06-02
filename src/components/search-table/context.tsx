@@ -215,8 +215,8 @@ export function SearchTableProvider<T>({
   )
 
   return (
-    <SearchTableContext.Provider value={value as ContextValue<unknown>}>
+    <SearchTableContext value={value as ContextValue<unknown>}>
       {children}
-    </SearchTableContext.Provider>
+    </SearchTableContext>
   )
 }
