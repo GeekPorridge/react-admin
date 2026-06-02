@@ -1,24 +1,36 @@
 import type { AgChartOptions } from 'ag-charts-community'
 import { AgCharts } from 'ag-charts-react'
-import { Card, Col, Row, Statistic } from 'antd'
+import { Card, Col, Row, Skeleton, Statistic } from 'antd'
 import { useMemo } from 'react'
 import { useAppTheme } from '@/hooks/use-app-theme'
+import { useApi } from '@/hooks/use-swr'
 import styles from './index.module.css'
 
-const chartData = [
-  { month: 'Jan', users: 1200, orders: 760 },
-  { month: 'Feb', users: 1800, orders: 980 },
-  { month: 'Mar', users: 2400, orders: 1320 },
-  { month: 'Apr', users: 2100, orders: 1180 },
-  { month: 'May', users: 2800, orders: 1680 },
-  { month: 'Jun', users: 3200, orders: 1940 },
-]
+interface DashboardStats {
+  users: number
+  orders: number
+  conversionRate: number
+}
+
+interface ChartItem {
+  month: string
+  users: number
+  orders: number
+}
 
 const Dashboard = () => {
   const { mode } = useAppTheme()
+  const { data: stats, isLoading: statsLoading } =
+    useApi<DashboardStats>('/dashboard/stats')
+  const { data: chartData, isLoading: chartLoading } =
+    useApi<ChartItem[]>('/dashboard/chart')
 
-  const chartOptions = useMemo<AgChartOptions>(
-    () => ({
+  const chartOptions = useMemo<AgChartOptions | null>(() => {
+    if (!chartData) {
+      return null
+    }
+
+    return {
       theme: mode === 'dark' ? 'ag-default-dark' : 'ag-default',
       data: chartData,
       title: {
@@ -41,32 +53,56 @@ const Dashboard = () => {
       legend: {
         position: 'bottom',
       },
-    }),
-    [mode],
-  )
+    }
+  }, [mode, chartData])
 
   return (
     <div className={styles.stack}>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={8}>
           <Card>
-            <Statistic title="新增用户" value={3200} suffix="人" />
+            {statsLoading ? (
+              <Skeleton active paragraph={{ rows: 1 }} />
+            ) : (
+              <Statistic
+                title="新增用户"
+                value={stats?.users ?? 0}
+                suffix="人"
+              />
+            )}
           </Card>
         </Col>
         <Col xs={24} md={8}>
           <Card>
-            <Statistic title="订单数" value={1940} />
+            {statsLoading ? (
+              <Skeleton active paragraph={{ rows: 1 }} />
+            ) : (
+              <Statistic title="订单数" value={stats?.orders ?? 0} />
+            )}
           </Card>
         </Col>
         <Col xs={24} md={8}>
           <Card>
-            <Statistic title="转化率" value={18.6} precision={1} suffix="%" />
+            {statsLoading ? (
+              <Skeleton active paragraph={{ rows: 1 }} />
+            ) : (
+              <Statistic
+                title="转化率"
+                value={stats?.conversionRate ?? 0}
+                precision={1}
+                suffix="%"
+              />
+            )}
           </Card>
         </Col>
       </Row>
       <Card title="ag-charts-react 示例">
         <div className={styles.chartBody}>
-          <AgCharts options={chartOptions} />
+          {chartLoading || !chartOptions ? (
+            <Skeleton active />
+          ) : (
+            <AgCharts options={chartOptions} />
+          )}
         </div>
       </Card>
     </div>

@@ -4,8 +4,8 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { PATHS } from './paths'
 import type { AppRouteObject } from './types'
 
-const HomePage = lazy(() => import('@/pages/home'))
 const AdminPage = lazy(() => import('@/pages/admin'))
+const DashboardPage = lazy(() => import('@/pages/dashboard'))
 
 export const protectedRoutes: AppRouteObject[] = [
   {
@@ -14,7 +14,7 @@ export const protectedRoutes: AppRouteObject[] = [
   },
   {
     path: 'welcome',
-    element: <HomePage />,
+    element: <DashboardPage />,
     title: '欢迎',
     icon: <HomeOutlined />,
   },
