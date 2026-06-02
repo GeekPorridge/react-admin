@@ -54,8 +54,6 @@ const Login = () => {
       await auth.login(values)
       message.success('登录成功')
       navigate(from, { replace: true })
-    } catch (error) {
-      message.error(error instanceof Error ? error.message : '登录失败')
     } finally {
       setLoading(false)
     }
