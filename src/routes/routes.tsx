@@ -1,4 +1,8 @@
-import { HomeOutlined, SettingOutlined } from '@ant-design/icons'
+import {
+  HomeOutlined,
+  SettingOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons'
 import { lazy } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { PATHS } from './paths'
@@ -6,6 +10,7 @@ import type { AppRouteObject } from './types'
 
 const AdminPage = lazy(() => import('@/pages/admin'))
 const DashboardPage = lazy(() => import('@/pages/dashboard'))
+const UserListPage = lazy(() => import('@/pages/list/user-list'))
 
 export const protectedRoutes: AppRouteObject[] = [
   {
@@ -59,7 +64,7 @@ export const protectedRoutes: AppRouteObject[] = [
     path: 'list',
     element: <Outlet />,
     title: '列表页',
-    icon: <SettingOutlined />,
+    icon: <UnorderedListOutlined />,
     breadcrumbTo: PATHS.HOME,
     children: [
       {
@@ -67,9 +72,9 @@ export const protectedRoutes: AppRouteObject[] = [
         element: <Navigate to={PATHS.HOME} replace />,
       },
       {
-        path: 'sub-page',
-        element: <AdminPage />,
-        title: '基础列表',
+        path: 'user-list',
+        element: <UserListPage />,
+        title: '用户列表',
       },
     ],
   },

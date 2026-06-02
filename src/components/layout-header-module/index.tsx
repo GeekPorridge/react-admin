@@ -40,16 +40,6 @@ const LayoutHeader = ({
 
   const userMenuItems: MenuProps['items'] = [
     {
-      key: 'personal',
-      label: '个人设置',
-      icon: <SettingFilled />,
-    },
-    {
-      key: 'theme',
-      label: '主题设置',
-      icon: <SkinFilled />,
-    },
-    {
       key: 'logout',
       label: '退出登录',
       icon: <LogoutOutlined />,
