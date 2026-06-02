@@ -1,43 +1,77 @@
+import { HomeOutlined, SettingOutlined } from '@ant-design/icons'
+import { lazy } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
-import AdminPage from '@/pages/admin/admin-page'
-import Dashboard from '@/pages/dashboard/dashboard-page'
 import { PATHS } from './paths'
 import type { AppRouteObject } from './types'
+
+const HomePage = lazy(() => import('@/pages/home'))
+const AdminPage = lazy(() => import('@/pages/admin'))
 
 export const protectedRoutes: AppRouteObject[] = [
   {
     index: true,
-    element: <Navigate to={PATHS.dashboard} replace />,
+    element: <Navigate to={PATHS.HOME} replace />,
   },
   {
-    path: 'dashboard',
-    element: <Dashboard />,
-    meta: {
-      title: '仪表盘',
-      icon: 'DashboardOutlined',
-    },
+    path: 'welcome',
+    element: <HomePage />,
+    title: '欢迎',
+    icon: <HomeOutlined />,
   },
   {
-    path: 'system',
+    path: 'admin',
     element: <Outlet />,
-    meta: {
-      title: '系统管理',
-      icon: 'SettingOutlined',
-      breadcrumbTo: PATHS.dashboard,
-    },
+    title: '管理页',
+    icon: <SettingOutlined />,
+    breadcrumbTo: PATHS.HOME,
     children: [
       {
         index: true,
-        element: <Navigate to={PATHS.dashboard} replace />,
+        element: <Navigate to={PATHS.HOME} replace />,
       },
       {
-        path: 'admin',
+        path: 'sub-page',
         element: <AdminPage />,
-        meta: {
-          title: '管理员页面',
-          icon: 'SafetyCertificateOutlined',
-          roles: ['admin'],
-        },
+        title: '二级管理页',
+        roles: ['admin'],
+      },
+    ],
+  },
+  {
+    path: 'form',
+    element: <Outlet />,
+    title: '表单页',
+    icon: <SettingOutlined />,
+    breadcrumbTo: PATHS.HOME,
+    children: [
+      {
+        index: true,
+        element: <Navigate to={PATHS.HOME} replace />,
+      },
+      {
+        path: 'sub-page',
+        element: <AdminPage />,
+        title: '基础表单',
+        roles: ['admin'],
+      },
+    ],
+  },
+  {
+    path: 'list',
+    element: <Outlet />,
+    title: '列表页',
+    icon: <SettingOutlined />,
+    breadcrumbTo: PATHS.HOME,
+    children: [
+      {
+        index: true,
+        element: <Navigate to={PATHS.HOME} replace />,
+      },
+      {
+        path: 'sub-page',
+        element: <AdminPage />,
+        title: '基础列表',
+        roles: ['admin'],
       },
     ],
   },

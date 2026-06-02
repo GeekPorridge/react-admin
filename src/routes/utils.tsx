@@ -1,40 +1,36 @@
-import {
-  DashboardOutlined,
-  SafetyCertificateOutlined,
-  SettingOutlined,
-} from '@ant-design/icons'
 import type { MenuProps } from 'antd'
-import type { ReactNode } from 'react'
 import type { RouteObject } from 'react-router-dom'
 import ProtectedRoute from '@/components/protected-route'
-import type { AppRouteObject, RouteMeta } from './types'
+import type { AppRouteObject } from './types'
 
 type MenuItem = NonNullable<MenuProps['items']>[number]
-
-const iconMap: Record<string, ReactNode> = {
-  DashboardOutlined: <DashboardOutlined />,
-  SafetyCertificateOutlined: <SafetyCertificateOutlined />,
-  SettingOutlined: <SettingOutlined />,
-}
 
 const joinPath = (parentPath: string, childPath: string) => {
   const normalizedParent = parentPath === '/' ? '' : parentPath
   return `${normalizedParent}/${childPath}`.replace(/\/+/g, '/')
 }
 
-const hasRoleAccess = (meta: RouteMeta | undefined, roles: string[]) =>
-  !meta?.roles?.length || meta.roles.some((role) => roles.includes(role))
+const hasRoleAccess = (requiredRoles: string[] | undefined, roles: string[]) =>
+  !requiredRoles?.length || requiredRoles.some((role) => roles.includes(role))
 
 export const toReactRouterRoutes = (routes: AppRouteObject[]): RouteObject[] =>
   routes.map((route) => {
-    const element = route.meta?.roles?.length ? (
-      <ProtectedRoute key={route.path} roles={route.meta.roles}>
+    const element = route.roles?.length ? (
+      <ProtectedRoute key={route.path} roles={route.roles}>
         {route.element}
       </ProtectedRoute>
     ) : (
       route.element
     )
-    const handle = route.meta ? { meta: route.meta } : undefined
+    const handle = route.title
+      ? {
+          meta: {
+            title: route.title,
+            breadcrumbTo: route.breadcrumbTo,
+            redirectTo: route.redirectTo,
+          },
+        }
+      : undefined
 
     if (route.index) {
       return {
@@ -60,11 +56,7 @@ export const buildMenuItems = (
   parentPath = '',
 ): MenuItem[] =>
   routes.reduce<MenuItem[]>((items, route) => {
-    if (
-      !route.path ||
-      route.meta?.hideInMenu ||
-      !hasRoleAccess(route.meta, roles)
-    ) {
+    if (!route.path || route.hideInMenu || !hasRoleAccess(route.roles, roles)) {
       return items
     }
 
@@ -79,8 +71,8 @@ export const buildMenuItems = (
 
     items.push({
       key,
-      icon: route.meta?.icon ? iconMap[route.meta.icon] : undefined,
-      label: route.meta?.title ?? route.path,
+      icon: route.icon,
+      label: route.title ?? route.path,
       children,
     })
 

@@ -10,7 +10,7 @@ const NotFound = () => {
       subTitle="页面不存在或已被移动。"
       extra={
         <Button type="primary">
-          <Link to={PATHS.dashboard}>返回首页</Link>
+          <Link to={PATHS.HOME}>返回首页</Link>
         </Button>
       }
     />

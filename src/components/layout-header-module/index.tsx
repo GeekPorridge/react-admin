@@ -11,7 +11,7 @@ import { Avatar, Button, Dropdown, Flex, Layout, Space } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/hooks/use-auth'
 import { PATHS } from '@/routes/paths'
-import styles from './layout-header.module.css'
+import styles from './index.module.css'
 
 const { Header } = Layout
 
@@ -34,7 +34,7 @@ const LayoutHeader = ({
   const handleMenuItemClick: MenuProps['onClick'] = (event) => {
     if (event.key === 'logout') {
       logout()
-      navigate(PATHS.login, { replace: true })
+      navigate(PATHS.LOGIN, { replace: true })
     }
   }
 

@@ -10,7 +10,7 @@ const Forbidden = () => {
       subTitle="抱歉，当前账号没有权限访问此页面。"
       extra={
         <Button type="primary">
-          <Link to={PATHS.dashboard}>返回仪表盘</Link>
+          <Link to={PATHS.HOME}>返回仪表盘</Link>
         </Button>
       }
     />

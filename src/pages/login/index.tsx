@@ -21,7 +21,7 @@ import reactLogo from '@/assets/react.svg'
 import viteLogo from '@/assets/vite.svg'
 import { useAuth } from '@/hooks/use-auth'
 import { PATHS } from '@/routes/paths'
-import styles from './login.module.css'
+import styles from './index.module.css'
 
 interface LoginValues {
   username: string
@@ -41,7 +41,7 @@ const Login = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const redirectState = location.state as RedirectState | null
-  const from = redirectState?.from?.pathname ?? PATHS.dashboard
+  const from = redirectState?.from?.pathname ?? PATHS.HOME
 
   if (auth.isAuthenticated) {
     return <Navigate to={from} replace />

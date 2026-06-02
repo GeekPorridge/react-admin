@@ -1,5 +1,5 @@
 export const PATHS = {
-  login: '/login',
-  dashboard: '/dashboard',
-  forbidden: '/403',
+  LOGIN: '/login',
+  HOME: '/welcome',
+  FORBIDDEN: '/403',
 } as const

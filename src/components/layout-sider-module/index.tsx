@@ -1,6 +1,6 @@
 import { Layout } from 'antd'
 import SidebarMenu from '../sidebar-menu'
-import styles from './layout-sider.module.css'
+import styles from './index.module.css'
 
 const { Sider } = Layout
 

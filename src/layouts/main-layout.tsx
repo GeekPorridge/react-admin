@@ -1,12 +1,12 @@
 import { theme as antdTheme, Drawer, Grid, Layout } from 'antd'
 import { type CSSProperties, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import AppBreadcrumb from '@/components/app-breadcrumb'
-import LayoutHeader from '@/components/layout-header-module/layout-header'
-import LayoutSider from '@/components/layout-sider-module/layout-sider'
+import LayoutHeader from '@/components/layout-header-module'
+import LayoutSider from '@/components/layout-sider-module'
 import SidebarMenu from '@/components/sidebar-menu'
 import { useAppTheme } from '@/hooks/use-app-theme'
-import styles from './main-layout.module.css'
+import styles from './index.module.css'
 
 const { Content } = Layout
 const { useBreakpoint } = Grid
@@ -14,6 +14,8 @@ const { useBreakpoint } = Grid
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const location = useLocation()
+  const { pathname } = location
   const screens = useBreakpoint()
   const { token } = antdTheme.useToken()
   const { mode, toggleTheme } = useAppTheme()
@@ -46,9 +48,11 @@ const MainLayout = () => {
           />
         )}
         <Content className={styles.content}>
-          <div className={styles.breadcrumb}>
-            <AppBreadcrumb />
-          </div>
+          {pathname !== '/welcome' && (
+            <div className={styles.breadcrumb}>
+              <AppBreadcrumb />
+            </div>
+          )}
           <Outlet />
         </Content>
       </Layout>

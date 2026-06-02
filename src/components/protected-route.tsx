@@ -17,11 +17,11 @@ const ProtectedRoute = ({ children, roles }: ProtectedRouteProps) => {
   const location = useLocation()
 
   if (!auth.isAuthenticated) {
-    return <Navigate to={PATHS.login} replace state={{ from: location }} />
+    return <Navigate to={PATHS.LOGIN} replace state={{ from: location }} />
   }
 
   if (!canAccess(roles, auth.roles)) {
-    return <Navigate to={PATHS.forbidden} replace />
+    return <Navigate to={PATHS.FORBIDDEN} replace />
   }
 
   return children ?? <Outlet />

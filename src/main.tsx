@@ -1,7 +1,7 @@
 import { AllCommunityModule, ModuleRegistry } from 'ag-charts-community'
-import { App as AntdApp, ConfigProvider, theme } from 'antd'
+import { App as AntdApp, ConfigProvider, Flex, Spin, theme } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { AuthProvider } from '@/context/auth-context'
@@ -29,7 +29,19 @@ function RootApp() {
     >
       <AntdApp>
         <AuthProvider>
-          <RouterProvider router={router} />
+          <Suspense
+            fallback={
+              <Flex
+                justify="center"
+                align="center"
+                style={{ minHeight: '100vh' }}
+              >
+                <Spin size="large" />
+              </Flex>
+            }
+          >
+            <RouterProvider router={router} />
+          </Suspense>
         </AuthProvider>
       </AntdApp>
     </ConfigProvider>

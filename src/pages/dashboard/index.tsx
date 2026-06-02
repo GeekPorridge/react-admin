@@ -3,7 +3,7 @@ import { AgCharts } from 'ag-charts-react'
 import { Card, Col, Row, Statistic } from 'antd'
 import { useMemo } from 'react'
 import { useAppTheme } from '@/hooks/use-app-theme'
-import styles from './dashboard.module.css'
+import styles from './index.module.css'
 
 const chartData = [
   { month: 'Jan', users: 1200, orders: 760 },

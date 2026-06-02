@@ -53,15 +53,12 @@ const SidebarMenu = ({ collapsed, onNavigate }: SidebarMenuProps) => {
     () => getMenuSelection(menuItems, location.pathname),
     [location.pathname, menuItems],
   )
-  const openKeys = useMemo(
-    () => {
-      const merged = collapsed
-        ? userOpenKeys
-        : Array.from(new Set([...userOpenKeys, ...matchedOpenKeys]))
-      return merged
-    },
-    [collapsed, matchedOpenKeys, userOpenKeys],
-  )
+  const openKeys = useMemo(() => {
+    const merged = collapsed
+      ? userOpenKeys
+      : Array.from(new Set([...userOpenKeys, ...matchedOpenKeys]))
+    return merged
+  }, [collapsed, matchedOpenKeys, userOpenKeys])
 
   return (
     <Menu

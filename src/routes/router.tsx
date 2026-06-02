@@ -1,21 +1,23 @@
+import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import ProtectedRoute from '@/components/protected-route'
-import MainLayout from '@/layouts/main-layout'
-import Forbidden from '@/pages/forbidden/forbidden-page'
-import Login from '@/pages/login/login-page'
-import NotFound from '@/pages/not-found/not-found'
 import { PATHS } from './paths'
 import { protectedRoutes } from './routes'
 import { toReactRouterRoutes } from './utils'
 
+const LoginPage = lazy(() => import('@/pages/login'))
+const ForbiddenPage = lazy(() => import('@/pages/forbidden'))
+const NotFoundPage = lazy(() => import('@/pages/not-found'))
+const MainLayout = lazy(() => import('@/layouts/main-layout'))
+
 export const router = createBrowserRouter([
   {
-    path: PATHS.login,
-    element: <Login />,
+    path: PATHS.LOGIN,
+    element: <LoginPage />,
   },
   {
-    path: PATHS.forbidden,
-    element: <Forbidden />,
+    path: PATHS.FORBIDDEN,
+    element: <ForbiddenPage />,
   },
   {
     path: '/',
@@ -28,6 +30,6 @@ export const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <NotFound />,
+    element: <NotFoundPage />,
   },
 ])
